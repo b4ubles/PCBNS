@@ -33,11 +33,17 @@ ___On the one hand, NoSQL has a rapid processing capability on unstructured data
 
 Our project, is to compare various aspects of the two modes of database, and to analyze the pros and cons of both databases, for more in-depth study in the future.
 
-### Select database
+### Environment
 
-> SQL: mysql
+> OS：Ubuntu 14.0.2
 >
-> NoSQL: Mongodb
+> CPU:Intel(R) Core(TM) i5-4210M CPU @ 2.40GHZ
+>
+> SQL：MySQL-5.6.0
+>
+> NoSQL：MongoDB-2.4.9
+>
+> tool kit：MySQLslap，YCSB-0.7.0
 
 ### Experimental Program
 
