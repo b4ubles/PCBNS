@@ -2,6 +2,7 @@
 import urllib2
 from bs4 import BeautifulSoup
 import fileinput
+import urllib
 
 import sys
 reload(sys)
@@ -31,7 +32,13 @@ def dfs_dom_tree(node, father_rank):
         else:
             value_data = 'None'
 
-        data = name + '\t' + link + '\t' + id_data + '\t' + class_data + '\t' + str(key_rank) + '\t' + str(father_rank) + '\t' + value_data + '\n'
+        id_data = urllib.quote_plus(id_data)
+        class_data = urllib.quote_plus(class_data)
+        num1 = urllib.quote_plus(str(father_rank))
+        num2 = urllib.quote_plus(str(key_rank))
+        value_data = urllib.quote_plus(value_data)
+        type_data = urllib.quote_plus(name)
+        data = type_data + ',' + link + ',' + id_data + ',' + class_data + ',' + num1 + ',' + num2 + ',' + value_data + '\n'
 
         with open(filename, 'a') as f:
             f.write(data)
@@ -44,7 +51,7 @@ def dfs_dom_tree(node, father_rank):
 
 zz_num = 0
 filename = 'SQL_data.txt'
-data = 'tpye    url id  class  father  key  value' + '\n'
+data = 'tpye,url,id,class,father,key,value' + '\n'
 with open(filename, 'a') as f:
     f.write(data)
 
@@ -55,6 +62,7 @@ for line in fileinput.input("url.txt"):
     res = urllib2.urlopen(req)
     the_page = res.read()
     soup = BeautifulSoup(the_page,'lxml')
+    link = urllib.quote_plus(link)
     dfs_dom_tree(soup.html, 0)
     zz_num = zz_num + 1
 
