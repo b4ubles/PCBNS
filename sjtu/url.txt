@@ -192,7 +192,6 @@ http://www.jwc.sjtu.edu.cn/web/sjtu/198045-1980000003790.htm
 http://www.jwc.sjtu.edu.cn/web/sjtu/198045-1980000003798.htm
 http://www.jwc.sjtu.edu.cn/web/sjtu/198045-1980000004140.htm
 http://www.jwc.sjtu.edu.cn/web/sjtu/198045-1980000004661.htm
-http://www.jwc.sjtu.edu.cn/web/sjtu/198392-1980000004660.htm
 http://www.jwc.sjtu.edu.cn/web/sjtu/198392-1980000004139.htm
 http://www.jwc.sjtu.edu.cn/web/sjtu/198392-1980000004692.htm
 http://www.jwc.sjtu.edu.cn/web/sjtu/198045-1980000004695.htm
@@ -363,3 +362,4 @@ http://www.jwc.sjtu.edu.cn/web/sjtu/198392-1980000005025.htm
 http://www.jwc.sjtu.edu.cn/web/sjtu/198392-1980000005030.htm
 http://www.jwc.sjtu.edu.cn/web/sjtu/198392-1980000005033.htm
 http://www.jwc.sjtu.edu.cn/web/sjtu/198392-1980000005032.htm
+http://www.sjtu.edu.cn/info/1266/26027.htm
