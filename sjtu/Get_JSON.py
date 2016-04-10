@@ -7,11 +7,13 @@ import fileinput
 zz_num = 0;
 
 for line in fileinput.input("url.txt"):
+    line = line.strip('\n')
     req = urllib2.Request(line)
     res = urllib2.urlopen(req)
     the_page = res.read()
     soup = BeautifulSoup(the_page,'xml')
     doc = xmltodict.parse(soup.prettify())
+    doc['url'] = line
     output = JSONEncoder().encode(doc)
     filename = 'MongoDB_data.json'
     data = output + '\n'
