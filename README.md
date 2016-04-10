@@ -1,4 +1,4 @@
-Performance Comparison between SQL and NoSQL
+Performance Comparison between NoSQL and SQL
 ============================================
 
 > [浏览中文翻译](README-zh.md)
