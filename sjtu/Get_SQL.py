@@ -15,6 +15,7 @@ def dfs_dom_tree(node, father_rank):
     father = key_rank
     name = getattr(node, "name", None)
     if name is not None:
+        key_rank = key_rank + 1
         dic = getattr(node, "attrs", None)
 
         if dic.has_key('id'):
@@ -46,17 +47,16 @@ def dfs_dom_tree(node, father_rank):
         #print data
 
         for child in node.children:
-            key_rank = key_rank + 1
             dfs_dom_tree(child, father)
 
 zz_num = 0
+key_rank = 0;
 filename = 'SQL_data.txt'
 data = 'tpye,url,id,class,father,key,value' + '\n'
 with open(filename, 'a') as f:
     f.write(data)
 
 for line in fileinput.input("url.txt"):
-    key_rank = 0;
     link = line.strip('\n')
     req = urllib2.Request(link)
     res = urllib2.urlopen(req)
