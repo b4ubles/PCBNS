@@ -35,4 +35,6 @@ if __name__ == '__main__':
 	conn = MongoClient('localhost')
 	db = conn.html
 	col = db.table
+	insert('data.json', col)
+	find('url', col, 20, 200)
 

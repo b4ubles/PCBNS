@@ -193,6 +193,21 @@ Voluntary context switches 2000932, Involuntary context switches 1179
 
 s2
 
+Benchmark
+	Average number of seconds to run all queries: 15681.052 seconds
+	Minimum number of seconds to run all queries: 15681.052 seconds
+	Maximum number of seconds to run all queries: 15681.052 seconds
+	Number of clients running queries: 1
+	Average number of queries per client: 1000000
+
+
+User time 8.17, System time 6.04
+Maximum resident set size 376092, Integral resident set size 0
+Non-physical pagefaults 56759, Physical pagefaults 0, Swaps 0
+Blocks in 77320 out 0, Messages in 0 out 0, Signals 0
+Voluntary context switches 2001475, Involuntary context switches 618
+
+
 s3
 
 Benchmark

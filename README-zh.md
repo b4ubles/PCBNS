@@ -37,11 +37,15 @@ ___一方面， NoSQL 对日新月异的非结构化数据有着令人瞠目结�
 >
 > CPU:Intel(R) Core(TM) i5-4210M CPU @ 2.40GHZ
 >
+> RAM：4G
+>
+> Storage: 20G HDD
+>
 > SQL：MySQL-5.6.0
 >
 > NoSQL：MongoDB-2.4.9
 >
-> tool kit：MySQLslap，YCSB-0.7.0
+> Tool Kit：MySQLslap，YCSB-0.7.0
 
 ### 实验计划
 
