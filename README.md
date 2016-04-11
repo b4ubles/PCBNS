@@ -39,11 +39,15 @@ Our project, is to compare various aspects of the two modes of database, and to 
 >
 > CPU:Intel(R) Core(TM) i5-4210M CPU @ 2.40GHZ
 >
+> RAM：4G
+>
+> Storage: 20G HDD
+>
 > SQL：MySQL-5.6.0
 >
 > NoSQL：MongoDB-2.4.9
 >
-> tool kit：MySQLslap，YCSB-0.7.0
+> Tool Kit：MySQLslap，YCSB-0.7.0
 
 ### Experimental Program
 
