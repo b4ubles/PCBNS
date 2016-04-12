@@ -14,62 +14,61 @@ def dfs_dom_tree(node, father_rank):
     global key_rank
     global link
     global filename
+    global filename_1
     name = getattr(node, "name", None)
     if name is not None:
         key_rank = key_rank + 1
         father = key_rank
-        dic = getattr(node, "attrs", None)
-
-        if dic.has_key('id'):
-            id_data = unicode(dic['id']).encode('utf-8')
-        else:
-            id_data = 'None'
-
-        if dic.has_key('class'):
-            class_data = unicode(dic['class']).encode('utf-8')
-        else:
-            class_data = 'None'
-
-        value_data = 'None'
-
-        id_data = urllib.quote(id_data)
-        class_data = urllib.quote(class_data)
         num1 = urllib.quote(str(father_rank))
         num2 = urllib.quote(str(key_rank))
-        value_data = urllib.quote(value_data)
         type_data = urllib.quote(name)
-        data = type_data + ',' + link + ',' + id_data + ',' + class_data + ',' + num1 + ',' + num2 + ',' + value_data + '\n'
-
+        data = link + ',' + type_data + ',' + num1 + ',' + num2 + '\n'
         with open(filename, 'a') as f:
             f.write(data)
 
-        print 'Get_SQL.py has made ' + str(key_rank) + ' nodes'
-        #print data
+        dic = getattr(node, "attrs", None)
+        for key in dic:
+            key_rank = key_rank + 1
+            type_data = urllib.quote(unicode('@' + key).encode('utf-8'))
+            value_data = urllib.quote((unicode(dic[key])[0:999]).encode('utf8'))
+            num1 = urllib.quote(str(father))
+            num2 = urllib.quote(str(key_rank))
+            data_1 = link + ',' + type_data + ',' + num1 + ',' + num2 + '\n'
+            data_2 = num2 + ',' + value_data + '\n'
+            with open(filename, 'a') as f:
+                f.write(data_1)
+            with open(filename_1, 'a') as f:
+                f.write(data_2)
+
         for child in node.children:
             dfs_dom_tree(child, father)
 
-    elif isinstance(node, bs4.element.NavigableString) and unicode(node.string) != u"\n":
+    elif isinstance(node, bs4.element.NavigableString) and ( not isinstance(node, bs4.element.Comment) ) :
         key_rank = key_rank + 1
-        value_data = unicode(node.string).encode('utf-8')
-        id_data = urllib.quote('None')
-        class_data = urllib.quote('None')
+        value_data = urllib.quote((unicode(node.string)[0:999]).encode('utf8'))
         num1 = urllib.quote(str(father_rank))
         num2 = urllib.quote(str(key_rank))
-        value_data = urllib.quote(value_data)
-        type_data = urllib.quote('text')
-        data = type_data + ',' + link + ',' + id_data + ',' + class_data + ',' + num1 + ',' + num2 + ',' + value_data + '\n'
+        type_data = urllib.quote('#text')
 
+        data_1 = link + ',' + type_data + ',' + num1 + ',' + num2 + '\n'
+        data_2 = num2 + ',' + value_data + '\n'
         with open(filename, 'a') as f:
-            f.write(data)
-        print 'Get_SQL.py has made ' + str(key_rank) + ' nodes'
-
+            f.write(data_1)
+        with open(filename_1, 'a') as f:
+            f.write(data_2)
 
 zz_num = 0
-key_rank = 0
-total_flag = 0
+key_rank = 0;
 filename = 'SQL_data.txt'
-data = 'tpye,url,id,class,father,key,value' + '\n'
+filename_1 = 'SQL_data_value.txt'
+total_flag = 0
+
+data = 'link,type,father,key' + '\n'
 with open(filename, 'a') as f:
+    f.write(data)
+
+data = 'key,value' + '\n'
+with open(filename_1, 'a') as f:
     f.write(data)
 
 for line in fileinput.input("url.txt"):
@@ -95,5 +94,6 @@ for line in fileinput.input("url.txt"):
     zz_num = zz_num + 1
 
     print 'done[ ' + str(zz_num) + ' ]: ' + link
+    print 'Get_SQL.py has found ' + str(key_rank) + ' nodes'
 
-print 'Get_SQL.py has occured ' + str(total_flag) + ' failures'
+print str(total_flag) + ' fails'
