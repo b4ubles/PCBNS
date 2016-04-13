@@ -2,15 +2,17 @@ from pymongo import MongoClient
 from time import clock
 from random import randint
 import json
+import fileinput
 
 def insert(fjson, col):
 	x = []
-	f = open(fjson)
-	for i in f:
-	  x.append(json.JSONDecoder().decode(i))
+	for line in fileinput.input(fjson):
+	  x.append(json.JSONDecoder().decode(line))
 
 	start = clock()
 	for i in x:
+	  print i
+	  break
 	  col.insert(i)
 
 	end = clock()
