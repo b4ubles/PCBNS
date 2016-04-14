@@ -54,6 +54,7 @@ def sql2json(url):
     #print urlres
     urlkey = urlres[0][3]
     res['html'] = getChild(urlkey)
+    res['url'] = url
     return res
 
 if __name__ == '__main__':
