@@ -50,17 +50,27 @@ def JSON2Html( key, zz_type ):
 
 if __name__ == '__main__':
 
-    input_file = 'input_SQL.txt'
+    trans_flag = sys.argv[1]
+    if (trans_flag == 'S'):
+        input_file = 'MySQL_data.txt'
+    elif (trans_flag == 'N'):
+        input_file = 'MongoDB_data.txt'
+    else:
+        print 'Error: Wrong arguements.'
+        print "ONLY 'S' and 'N' are allowed"
+        exit()
 
     for line in fileinput.input(input_file):
-
-
         dictVal = ast.literal_eval(line)
-
+#        dictVal = eval(line)
+#        print dictVal["url"]
+#        input()
+#        dictVal = JSONDecoder().decode(line)
         cutname = dictVal["url"].split('/')
         filename = cutname[-1]
         if not ('.' in filename):
             filename = filename + '.htm'
+        filename = trans_flag + '_' + filename
         url_1 = cutname[0] + '//' + cutname[2]
         url_2 = dictVal["url"][:-len(cutname[-1])]
         del dictVal["url"]
