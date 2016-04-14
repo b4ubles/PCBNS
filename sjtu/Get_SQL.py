@@ -30,7 +30,7 @@ def dfs_dom_tree(node, father_rank):
         for key in dic:
             key_rank = key_rank + 1
             type_data = urllib.quote(unicode('@' + key).encode('utf-8'))
-            value_data = urllib.quote((unicode(dic[key])[0:999]).encode('utf8'))
+            value_data = urllib.quote((unicode(dic[key])).encode('utf-8'))
             num1 = urllib.quote(str(father))
             num2 = urllib.quote(str(key_rank))
             data_1 = link + ',' + type_data + ',' + num1 + ',' + num2 + '\n'
@@ -45,7 +45,7 @@ def dfs_dom_tree(node, father_rank):
 
     elif isinstance(node, bs4.element.NavigableString) and ( not isinstance(node, bs4.element.Comment) ) :
         key_rank = key_rank + 1
-        value_data = urllib.quote((unicode(node.string)[0:999]).encode('utf8'))
+        value_data = urllib.quote((unicode(node.string)).encode('utf-8'))
         num1 = urllib.quote(str(father_rank))
         num2 = urllib.quote(str(key_rank))
         type_data = urllib.quote('#text')
