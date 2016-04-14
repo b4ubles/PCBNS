@@ -46,6 +46,23 @@ def t():
   except:
     return render_template('search.html')
 
+def checkout( dictVal , url_1, url_2):
+	for key in dictVal:
+	#    print "hh"
+		if ( ( key == "@src" ) or ( key == "@href" ) ):
+		#        print key
+		#        print dictVal[key]
+			if (dictVal[key][0] == '/'):
+				dictVal[key] = url_1 + dictVal[key]
+			elif ( dictVal[key][0:3] != 'http' ):
+				dictVal[key] = url_2 + dictVal[key]
+			if isinstance( dictVal[key], dict ):
+				checkout( dictVal[key] )
+			if isinstance( dictVal[key], list ):
+				for sub_dict in dictVal[key]:
+					if isinstance( sub_dict, dict ):
+						checkout( sub_dict )
+
 def genfile(url):
 	conn = MongoClient('localhost')
 	db = conn.html
@@ -57,13 +74,16 @@ def genfile(url):
 	#print line
 
 	#dictVal = json.JSONDecoder().decode(l)
-	print dictVal["url"]
-	filename = dictVal["url"].split('/')[-1]
+	cutname = dictVal["url"].split('/')
+	filename = cutname[-1]
+	url_1 = cutname[0] + '//' + cutname[2]
+	url_2 = dictVal["url"][:-len(cutname[-1])]
 	del dictVal["url"]
-	#print filename
+	checkout(dictVal, url_1, url_2)
 	#print dictVal
 	dictVal = {"root":dictVal}
 	data = xmltodict.unparse(dictVal, pretty = True)
+	data.replace('gb2312','utf-8')
 	#print data
 	f =  open("templates/"+filename, 'w')
 	f.write(data)
