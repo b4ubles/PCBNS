@@ -69,7 +69,7 @@ if __name__ == '__main__':
 #        dictVal = JSONDecoder().decode(line)
         cutname = dictVal["url"].split('/')
         filename = cutname[-1]
-        if not ('.' in filename):
+        if (filename[-3:] != "htm"):
             filename = filename + '.htm'
         filename = trans_flag + '_' + filename
         url_1 = cutname[0] + '//' + cutname[2]
