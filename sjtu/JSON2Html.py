@@ -35,7 +35,7 @@ def JSON2Html( key, zz_type ):
                     if ((sub_key == '@src' or sub_key == '@href') and (zz_content != "")):
                         if ( zz_content[0] == '/' ):
                             zz_content = url_1 + zz_content
-                        elif ( zz_content[:3] != 'http' ):
+                        elif ( zz_content[:4] != 'http' ):
                             zz_content = url_2 + zz_content
                     tag_name = tag_name + ' '
                     tag_name = tag_name + sub_key[1:] + '="'
