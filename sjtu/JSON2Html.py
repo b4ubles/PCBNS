@@ -26,10 +26,11 @@ def JSON2Html( key, zz_type ):
                     zz_content = 'text/html; charset=utf-8'
                 else:
                     zz_content = zz_decode(zz_type[sub_key])
-                zz_content = zz_content.replace("'"," ")
-                zz_content = zz_content.replace("["," ")
-                zz_content = zz_content.replace("]"," ")
-                if (sub_key == '@src' or sub_key == '@href'):
+                zz_content = zz_content.replace("'","")
+                zz_content = zz_content.replace("[","")
+                zz_content = zz_content.replace("]","")
+                zz_content = zz_content.replace(","," ")
+                if ((sub_key == '@src' or sub_key == '@href') and (zz_content != "")):
                     if ( zz_content[0] == '/' ):
                         zz_content = url_1 + zz_content
                     elif ( zz_content[:3] != 'http' ):
@@ -73,6 +74,8 @@ if __name__ == '__main__':
         filename = trans_flag + '_' + filename
         url_1 = cutname[0] + '//' + cutname[2]
         url_2 = dictVal["url"][:-len(cutname[-1])]
+        if (dictVal['url'] == "http://electsys.sjtu.edu.cn"):
+            url_2 = "http://electsys.sjtu.edu.cn/"
         del dictVal["url"]
 
         tag_name = 'html'
