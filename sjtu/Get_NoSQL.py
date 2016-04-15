@@ -84,6 +84,7 @@ for line in fileinput.input("url.txt"):
 
     with open(filename, 'a') as f:
         f.write(data)
+        f.white('\n')
 
     zz_num = zz_num + 1
 
