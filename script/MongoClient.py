@@ -11,8 +11,6 @@ def insert(fjson, col):
 
 	start = clock()
 	for i in x:
-	  print i
-	  break
 	  col.insert(i)
 
 	end = clock()
