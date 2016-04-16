@@ -5,16 +5,17 @@ import MySQLdb
 import pprint
 from urllib import unquote
 
+PRINT_SQL = True
 DATABASE = 'test'
 of = open('out.sql', 'w+',1)
-with open('mysql_passwd') as f:
-    passwd = f.read().strip()
-conn = MySQLdb.connect('localhost', 'root', passwd, 'test')
+conn = MySQLdb.connect('localhost', 'root', 'test', 'test')
 cur=conn.cursor()
 
 def getChild(k):
     res = {}
     getchild = 'select * from {}.html where father={}'.format(DATABASE, k)
+    if PRINT_SQL:
+        print getchild
     of.write(getchild+';\n')
     cur.execute(getchild)
     childres = cur.fetchall()
@@ -22,6 +23,8 @@ def getChild(k):
         t = record[1]
         if t[0] in ('#',  '@'):
             getvalue = 'select value from {}.value where k={}'.format(DATABASE, record[3])
+            if PRINT_SQL:
+                print getvalue
             of.write(getvalue+';\n')
             cur.execute(getvalue)
             try:
@@ -48,6 +51,8 @@ def getChild(k):
 def sql2json(url):
     res = {}
     geturl = 'select * from {}.html where url="{}" and type="html"'.format(DATABASE, url)
+    if PRINT_SQL:
+        print geturl
     of.write(geturl+';\n')
     cur.execute(geturl)
     urlres = cur.fetchall()
@@ -58,13 +63,18 @@ def sql2json(url):
     return res
 
 if __name__ == '__main__':
-    #resd = sql2json('http://www.jwc.sjtu.edu.cn/web/sjtu/198097-1980000000391.htm')
-    #pprint.pprint(resd)
+    for i in range(20):
+        resd = sql2json('http://www.jwc.sjtu.edu.cn/web/sjtu/198097-1980000000391.htm')
+    #print resd
+    '''
     num = 1
     for url in open('url.txt'):
         sql2json(url.strip())
         print num               # num is used to show the process of the program.
-        num += 1
+        num += 1'''
 
 f.close()
 conn.close()
+
+import subprocess
+p = subprocess.Popen(['mysqlslap','--create', 'use test', '--query', 'out.sql', '-uroot', '-ptest'])
