@@ -35,6 +35,7 @@ def search():
       urlist = request.form["url"]
       genfile(urlist)
       url = urlist.split("/")[-1]
+      url = "N_"+url
       return render_template(url)
     else:
       return "No such url in DB"

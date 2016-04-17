@@ -8,10 +8,18 @@ def find(url, col, times, ran):
 	for i in f:
 		x.append({"url":i})
 	
+	start = clock()
 	for i in range(times):
 		col.find(x[i])
 		print "db.table.findOne({\"url\"}:\"",x[i],"\")"
-	
+	end = clock()
+	time = end - start
+	print "\tAverage number of seconds to run all queries: " + str(time) + " seconds"
+	print "\tMinimum number of seconds to run all queries: " + str(time) + " seconds"
+	print "\tMaximum number of seconds to run all queries: " + str(time) + " seconds"
+	print "\tNumber of clients running queries: 1"
+	print "\tAverage number of queries per client: ",str(times)
+
 	f.close()
 
 
